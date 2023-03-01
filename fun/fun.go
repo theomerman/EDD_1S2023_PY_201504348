@@ -90,6 +90,7 @@ func LookSystem(userList *nodes.Node) {
 	}
 	PrintAll(userList)
 	GraphQueue(userList, "Lista de usuarios en el Sistema")
+	openImage("Lista de usuarios en el Sistema")
 }
 
 func AddToList(userList *nodes.Node, student *nodes.Student) *nodes.Node {
@@ -276,4 +277,37 @@ func ejecutar(nombre_imagen string, archivo_dot string) {
 	cmd, _ := exec.Command(path, "-Tjpg", archivo_dot).Output()
 	mode := 0777
 	_ = ioutil.WriteFile(nombre_imagen, cmd, os.FileMode(mode))
+}
+
+func openImage(name string) {
+	path, _ := exec.LookPath("display")
+	cmd, err := exec.Command(path, name).Output()
+	if err != nil {
+		fmt.Println("error: ", err)
+	}
+	fmt.Println("resultado: ", cmd)
+}
+
+func SearchUser(node *nodes.Node, id string, pass string) *nodes.Node {
+	flag := true
+
+	tmp := *node
+	
+	if tmp.Next == nil {
+		if string(tmp.User.Id) == id && tmp.User.Pass == pass {
+			return &tmp
+		} else {
+			return nil
+		}
+	}
+	for flag {
+		tmp = *tmp.Next
+		if string(tmp.User.Id) == id && tmp.User.Pass == pass {
+			return &tmp
+		}
+		if tmp.Next == nil {
+			flag = false
+		}
+	}
+	return nil
 }

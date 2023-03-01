@@ -33,13 +33,36 @@ func Menu() {
 			flag = false
 			break
 		} else if option == "1" {
-			MenuAdmin(&userList, &userQueue)
+			fmt.Print("Introduce tu usuario: ")
+			user := fun.ReadLine()
+			fmt.Print("Introduce tu Contraseña: ")
+			pass := fun.ReadLine()
+			if user == "admin" && pass == "admin" {
+				menuAdmin(&userList, &userQueue)
+			} else {
+
+				if userList == nil {
+					fmt.Println("El usuario no existe en la base de datos")
+				} else {
+					// tmp := fun.SearchUser(userList, user, pass)
+					// fmt.Print(tmp)
+					// 	if temporal != nil {
+					// 		fmt.Println("entro**************************************************************************")
+					// 	} else {
+					// 		fmt.Println("El usuario no existe en la base de datos")
+					// 	}
+
+					// 	// tmp.User.Log.SetTime(tmp.User.Name)
+				}
+			}
 		}
 
 	}
 }
+func menuUser() {
 
-func MenuAdmin(userList **nodes.Node, userQueue **nodes.Node) {
+}
+func menuAdmin(userList **nodes.Node, userQueue **nodes.Node) {
 	option := ""
 	flag2 := true
 	fmt.Println("Se inició sesión correctamente")
@@ -61,8 +84,10 @@ func MenuAdmin(userList **nodes.Node, userQueue **nodes.Node) {
 
 			fun.LookPending(*userQueue)
 			acceptStudentMenu(&*userQueue, &*userList)
+
 		case "2":
 			fun.LookSystem(*userList)
+			nodes.GenerateJSON(*userList)
 
 		case "3":
 

@@ -1,0 +1,22 @@
+{
+    "alumnos": [
+        {
+            "nombre": "Landon Dominguez",
+            "carnet": 201834323,
+            "password": "jfIXb85goT1j",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Natalia Romero",
+            "carnet": 201154386,
+            "password": "xSY0U6!XU6Kv",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Isabella Weber",
+            "carnet": 201284666,
+            "password": "6OAtts#68ysE",
+            "Carpeta_Raiz": "/"
+        }
+    ]
+}
