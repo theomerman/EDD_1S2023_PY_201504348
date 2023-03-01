@@ -4,8 +4,10 @@ import (
 	"bufio"
 	"encoding/csv"
 	"fmt"
+	"io/ioutil"
 	"nodes"
 	"os"
+	"os/exec"
 	"strconv"
 )
 
@@ -87,6 +89,17 @@ func LookSystem(userList *nodes.Node) {
 		return
 	}
 	PrintAll(userList)
+	GraphQueue(userList, "Lista de usuarios en el Sistema")
+}
+
+func AddToList(userList *nodes.Node, student *nodes.Student) *nodes.Node {
+
+	if userList == nil {
+
+		return NewNode(student)
+	} else {
+		return AddStart(userList, student)
+	}
 }
 
 func AddToQueue(userQueue *nodes.Node) *nodes.Node {
@@ -152,6 +165,31 @@ func ReadCsvFile(filePath string) [][]string {
 	return records[1:]
 }
 
+func ListSize(list *nodes.Node) (int, *nodes.Node) {
+	flag := true
+	tmp := list
+	counter := 0
+	if list == nil {
+		return counter, nil
+	}
+	for flag {
+		tmp = tmp.Next
+		counter++
+		if tmp == nil {
+			flag = false
+		}
+	}
+	flag = true
+	tmp = list
+	for flag {
+		tmp = tmp.Next
+		if tmp.Next == nil {
+			flag = false
+		}
+	}
+	return counter, tmp
+}
+
 func PrintAll(list *nodes.Node) {
 	flag := true
 	tmp := list
@@ -164,4 +202,78 @@ func PrintAll(list *nodes.Node) {
 	}
 	fmt.Println()
 
+}
+
+func crearArchivoDot(nombre_archivo string) {
+	//Verifica que el archivo existe
+	var _, err = os.Stat(nombre_archivo)
+	//Crea el archivo si no existe
+	if os.IsNotExist(err) {
+		var file, err = os.Create(nombre_archivo)
+		if err != nil {
+			return
+		}
+		defer file.Close()
+	}
+	fmt.Println("Archivo creado exitosamente", nombre_archivo)
+}
+
+func escribirArchivoDot(contenido string, nombre_archivo string) {
+	// Abre archivo usando permisos READ & WRITE
+	var file, err = os.OpenFile(nombre_archivo, os.O_RDWR, 0644)
+	if err != nil {
+		return
+	}
+	defer file.Close()
+	// Escribe algo de texto linea por linea
+	_, err = file.WriteString(contenido)
+	if err != nil {
+		return
+	}
+	// Salva los cambios
+	err = file.Sync()
+	if err != nil {
+		return
+	}
+	fmt.Println("Archivo actualizado existosamente.")
+}
+
+func GraphQueue(node *nodes.Node, nombre_imagen string) {
+	fmt.Println("Impresion")
+	nombre_archivo_dot := "./lista.dot"
+	// nombre_imagen := "lista.jpg"
+	texto := "digraph lista{\n"
+	texto += "rankdir=LR;\n"
+	texto += "node[shape = record];\n"
+	texto += "nodonull1[label=\"null\"];\n"
+	texto += "nodonull2[label=\"null\"];\n"
+	auxiliar := node
+	contador := 0
+	size, _ := ListSize(node)
+	for i := 0; i < size; i++ {
+		texto = texto + "nodo" + strconv.Itoa(i) + "[label=\"{|" + strconv.Itoa(auxiliar.User.Id) + "\\n" + auxiliar.User.Name + "|}\"];\n"
+		auxiliar = auxiliar.Next
+	}
+
+	texto += "nodonull1->nodo0 [dir=back];\n"
+	for i := 0; i < size-1; i++ {
+		c := i + 1
+		texto += "nodo" + strconv.Itoa(i) + "->nodo" + strconv.Itoa(c) + ";\n"
+		texto += "nodo" + strconv.Itoa(c) + "->nodo" + strconv.Itoa(i) + ";\n"
+		contador = c
+	}
+	texto += "nodo" + strconv.Itoa(contador) + "->nodonull2;\n"
+	texto += "}"
+
+	crearArchivoDot(nombre_archivo_dot)
+	escribirArchivoDot(texto, nombre_archivo_dot)
+	ejecutar(nombre_imagen, nombre_archivo_dot)
+
+}
+
+func ejecutar(nombre_imagen string, archivo_dot string) {
+	path, _ := exec.LookPath("dot")
+	cmd, _ := exec.Command(path, "-Tjpg", archivo_dot).Output()
+	mode := 0777
+	_ = ioutil.WriteFile(nombre_imagen, cmd, os.FileMode(mode))
 }
