@@ -93,34 +93,3 @@ func escribirArchivoJSON(contenido string, nombre_archivo string) {
 	}
 	fmt.Println("Archivo actualizado existosamente.")
 }
-
-// func GraphQueue(node *nodes.Node, nombre_imagen string) {
-// 	fmt.Println("Impresion")
-// 	nombre_archivo_dot := "./lista.json"
-// 	// nombre_imagen := "lista.jpg"
-// 	texto := "digraph lista{\n"
-// 	texto += "rankdir=LR;\n"
-// 	texto += "node[shape = record];\n"
-// 	texto += "nodonull1[label=\"null\"];\n"
-// 	texto += "nodonull2[label=\"null\"];\n"
-// 	auxiliar := node
-// 	contador := 0
-// 	size, _ := ListSize(node)
-// 	for i := 0; i < size; i++ {
-// 		texto = texto + "nodo" + strconv.Itoa(i) + "[label=\"{|" + strconv.Itoa(auxiliar.User.Id) + "\\n" + auxiliar.User.Name + "|}\"];\n"
-// 		auxiliar = auxiliar.Next
-// 	}
-
-// 	texto += "nodonull1->nodo0 [dir=back];\n"
-// 	for i := 0; i < size-1; i++ {
-// 		c := i + 1
-// 		texto += "nodo" + strconv.Itoa(i) + "->nodo" + strconv.Itoa(c) + ";\n"
-// 		texto += "nodo" + strconv.Itoa(c) + "->nodo" + strconv.Itoa(i) + ";\n"
-// 		contador = c
-// 	}
-// 	texto += "nodo" + strconv.Itoa(contador) + "->nodonull2;\n"
-// 	texto += "}"
-
-// 	crearArchivoDot(nombre_archivo_dot)
-// 	escribirArchivoDot(texto, nombre_archivo_dot)
-// }

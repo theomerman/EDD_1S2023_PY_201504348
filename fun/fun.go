@@ -55,6 +55,10 @@ func RemoveStart(node *nodes.Node) *nodes.Node {
 func RemoveEnd(node *nodes.Node) *nodes.Node {
 	tmp := node
 	flag := true
+	if node.Next == nil {
+
+		return nil
+	}
 	for flag {
 		tmp = tmp.Next
 		if tmp.Next.Next == nil {
@@ -81,6 +85,7 @@ func LookPending(userQueue *nodes.Node) {
 		return
 	}
 	PrintAll(userQueue)
+	OpenImage("Estudiantes en la cola")
 }
 
 func LookSystem(userList *nodes.Node) {
@@ -90,7 +95,7 @@ func LookSystem(userList *nodes.Node) {
 	}
 	PrintAll(userList)
 	GraphQueue(userList, "Lista de usuarios en el Sistema")
-	openImage("Lista de usuarios en el Sistema")
+	OpenImage("Lista de usuarios en el Sistema")
 }
 
 func AddToList(userList *nodes.Node, student *nodes.Student) *nodes.Node {
@@ -102,6 +107,14 @@ func AddToList(userList *nodes.Node, student *nodes.Student) *nodes.Node {
 		return AddStart(userList, student)
 	}
 }
+
+// func Sorted(userList *nodes.Node, student *nodes.Student) *nodes.Node {
+// 	if userList == nil {
+
+// 		return NewNode(student)
+// 	}
+// 	if
+// }
 
 func AddToQueue(userQueue *nodes.Node) *nodes.Node {
 	fmt.Print("Ingrese el Nombre: ")
@@ -125,8 +138,9 @@ func AddToQueue(userQueue *nodes.Node) *nodes.Node {
 	}
 }
 
-func MasiveLoad(userQueue *nodes.Node) *nodes.Node {
-	csv := ReadCsvFile("prueba.csv")
+func MasiveLoad(userQueue *nodes.Node, root string) *nodes.Node {
+	file := root + ".csv"
+	csv := ReadCsvFile(file)
 
 	for _, line := range csv {
 		id, err := strconv.ParseInt(line[0], 0, 64)
@@ -172,6 +186,9 @@ func ListSize(list *nodes.Node) (int, *nodes.Node) {
 	counter := 0
 	if list == nil {
 		return counter, nil
+	}
+	if list.Next == nil {
+		return 1, tmp
 	}
 	for flag {
 		tmp = tmp.Next
@@ -242,7 +259,6 @@ func escribirArchivoDot(contenido string, nombre_archivo string) {
 func GraphQueue(node *nodes.Node, nombre_imagen string) {
 	fmt.Println("Impresion")
 	nombre_archivo_dot := "./lista.dot"
-	// nombre_imagen := "lista.jpg"
 	texto := "digraph lista{\n"
 	texto += "rankdir=LR;\n"
 	texto += "node[shape = record];\n"
@@ -269,6 +285,75 @@ func GraphQueue(node *nodes.Node, nombre_imagen string) {
 	crearArchivoDot(nombre_archivo_dot)
 	escribirArchivoDot(texto, nombre_archivo_dot)
 	ejecutar(nombre_imagen, nombre_archivo_dot)
+	// openImage("Estudiantes en Cola")
+
+}
+
+func GraphUserLog(node *nodes.Node, nombre_imagen string) {
+	fmt.Println("Impresion")
+	nombre_archivo_dot := "./lista.dot"
+	texto := "digraph lista{\n"
+	texto += "rankdir=LR;\n"
+	texto += "node[shape = record];\n"
+	// texto += "nodonull1[label=\"null\"];\n"
+	// texto += "nodonull2[label=\"null\"];\n"
+	auxiliar := node.Log
+	// contador := 0
+	size, _ := ListSize(node.Log)
+	for i := 0; i < size; i++ {
+		texto = texto + "nodo" + strconv.Itoa(i) + "[label=\"{|" + auxiliar.Queue.Name + "\\n" + auxiliar.Queue.Date + "\\n" + auxiliar.Queue.Hour + "|}\"];\n"
+		auxiliar = auxiliar.Next
+	}
+	// texto += "nodonull1->nodo0 [dir=back];\n"
+	for i := 0; i < size-1; i++ {
+		c := i + 1
+		texto += "nodo" + strconv.Itoa(i) + "->nodo" + strconv.Itoa(c) + ";\n"
+		// texto += "nodo" + strconv.Itoa(c) + "->nodo" + strconv.Itoa(i) + ";\n"
+		// contador = c
+	}
+	// texto += "nodo" + strconv.Itoa(contador) + "->nodonull2;\n"
+	texto += "}"
+	crearArchivoDot(nombre_archivo_dot)
+	escribirArchivoDot(texto, nombre_archivo_dot)
+	ejecutar(nombre_imagen, nombre_archivo_dot)
+	// OpenImage("Log de Usuarios")
+
+}
+
+func GraphAdminLog(node *nodes.Node, nombre_imagen string) {
+	fmt.Println("Impresion")
+	nombre_archivo_dot := "./lista.dot"
+	texto := "digraph lista{\n"
+	texto += "rankdir=LR;\n"
+	texto += "node[shape = record];\n"
+	// texto += "nodonull1[label=\"null\"];\n"
+	// texto += "nodonull2[label=\"null\"];\n"
+	auxiliar := node
+	// contador := 0
+	size, _ := ListSize(node)
+	for i := 0; i < size; i++ {
+		accepted := ""
+		if auxiliar.Queue.Accepted == true {
+			accepted = "Usuario Aceptado\\n"
+		} else {
+			accepted = "Usuiario Rechazado\\n"
+		}
+		texto = texto + "nodo" + strconv.Itoa(i) + "[label=\"{|" + accepted + auxiliar.Queue.Name + "\\n" + auxiliar.Queue.Date + "\\n" + auxiliar.Queue.Hour + "|}\"];\n"
+		auxiliar = auxiliar.Next
+	}
+	// texto += "nodonull1->nodo0 [dir=back];\n"
+	for i := 0; i < size-1; i++ {
+		c := i + 1
+		texto += "nodo" + strconv.Itoa(i) + "->nodo" + strconv.Itoa(c) + ";\n"
+		// texto += "nodo" + strconv.Itoa(c) + "->nodo" + strconv.Itoa(i) + ";\n"
+		// contador = c
+	}
+	// texto += "nodo" + strconv.Itoa(contador) + "->nodonull2;\n"
+	texto += "}"
+	crearArchivoDot(nombre_archivo_dot)
+	escribirArchivoDot(texto, nombre_archivo_dot)
+	ejecutar(nombre_imagen, nombre_archivo_dot)
+	// OpenImage("Log de Usuarios")
 
 }
 
@@ -279,7 +364,7 @@ func ejecutar(nombre_imagen string, archivo_dot string) {
 	_ = ioutil.WriteFile(nombre_imagen, cmd, os.FileMode(mode))
 }
 
-func openImage(name string) {
+func OpenImage(name string) {
 	path, _ := exec.LookPath("display")
 	cmd, err := exec.Command(path, name).Output()
 	if err != nil {
@@ -288,26 +373,67 @@ func openImage(name string) {
 	fmt.Println("resultado: ", cmd)
 }
 
-func SearchUser(node *nodes.Node, id string, pass string) *nodes.Node {
+func SearchUser(userList **nodes.Node, id string, pass string) *nodes.Node {
 	flag := true
 
-	tmp := *node
-	
+	tmp := *userList
+
 	if tmp.Next == nil {
-		if string(tmp.User.Id) == id && tmp.User.Pass == pass {
-			return &tmp
+
+		if strconv.FormatInt(int64(tmp.User.Id), 10) == id && tmp.User.Pass == pass {
+			// fmt.Println(tmp)
+			return tmp
 		} else {
 			return nil
 		}
 	}
 	for flag {
-		tmp = *tmp.Next
-		if string(tmp.User.Id) == id && tmp.User.Pass == pass {
-			return &tmp
+		tmp = tmp.Next
+		if strconv.FormatInt(int64(tmp.User.Id), 10) == id && tmp.User.Pass == pass {
+			return tmp
 		}
 		if tmp.Next == nil {
 			flag = false
+
 		}
 	}
 	return nil
+}
+
+func NewLog(bitacora *nodes.Bitacora) *nodes.Node {
+	tmp := new(nodes.Node)
+	tmp.Queue = bitacora
+	return tmp
+}
+
+func NewLogin(usuario **nodes.Node) {
+	tmp := *usuario
+
+	if tmp.Log == nil {
+		tmp.Log = NewLog(nodes.NewBitacora(tmp.User.Name))
+		return
+	}
+
+	nodo := NewLog(nodes.NewBitacora(tmp.User.Name))
+	nodo.Next = tmp.Log
+	tmp.Log.Before = nodo
+	tmp.Log = nodo
+	nodo.Before = tmp.Log
+}
+
+func NewAdminLog(bitacora *nodes.Bitacora) *nodes.Node {
+
+	tmp := new(nodes.Node)
+	tmp.Queue = bitacora
+	return tmp
+}
+
+func AddLoginStart(node *nodes.Node, student *nodes.Student) *nodes.Node {
+
+	tmp := NewNode(student)
+
+	tmp.Next = node
+	node.Before = tmp
+
+	return tmp
 }
