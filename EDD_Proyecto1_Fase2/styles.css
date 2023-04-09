@@ -1,0 +1,30 @@
+html,
+body {
+    height: 100%;
+    background-color: dimgray;
+}
+
+
+.login-form {
+    max-width: 450px;
+    width: 100%;
+    border: 1px solid black;
+    padding: 10px;
+    margin: auto;
+    margin-top: 50px;
+    
+}
+
+h1 {
+    text-align: center;
+    margin-top: 50px;
+}
+
+table {
+    margin-top: 50px;
+    align-items: center;
+}
+
+.hide {
+    display: none;
+}

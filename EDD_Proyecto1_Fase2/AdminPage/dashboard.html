@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Button and Table Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
+        integrity="sha512-+Nn0oYXkGVzuv/38jxhA7wEdPEblAgdFzi1ddDZm3d73PHTXsLsT7KjzWlAmp7w2gHP/suQ2e7jukZ97fwtVbw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Button and Table Example</h1>
+        <div class="row">
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-primary" id="button1">Button 1</button>
+            </div>
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-secondary" id="button2">Button 2</button>
+            </div>
+            <div class="col-sm-4">
+                <input type="file" id="json-file-input" accept=".json">
+                <button id="load-json-btn">Load JSON</button>
+            </div>
+        </div>
+        <br>
+        <table class="table" id="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"
+        integrity="sha512-5Gquut8Wx5fm5pOhMV5DZrySS44X9XNqf3dtjok1XXzJIR/8utxGm6SBkI17Gm/vmUflC01mWl6jKbygUa+v6w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="AdminPage.js"></script>
+</body>
+
+</html>

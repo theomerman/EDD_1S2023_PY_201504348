@@ -1,34 +1,72 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Login Page</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="style.css">
+
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to Bootstrap CSS file -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+
 </head>
+
 <body>
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-lg-4 col-md-6 col-sm-8">
-				<form class="mt-5 p-4 border rounded">
-					<h1 class="mb-4 text-center">Iniciar Sesión</h1>
-					<div class="form-group">
-						<label for="username">Carné:</label>
-						<input type="text" class="form-control" id="username" name="username">
-					</div>
-					<div class="form-group">
-						<label for="password">Contraseña:</label>
-						<input type="password" class="form-control" id="password" name="password">
-					</div>
-					<button type="submit" class="btn btn-primary btn-block mt-4">Login</button>
-				</form>
-			</div>
-		</div>
-	</div>
-	
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <div class="login-form ocultar-div" id="login-div">
+        <h2 class="text-center">Iniciar Sesión</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">Carné:</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Introduce tu carné"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" class="form-control" id="password" name="password"
+                    placeholder="Introduce tu contraseña" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+    </div>
+    <br>
+
+    <div class="ocultar-div" id="admin-div">
+        <h1>Button and Table Example</h1>
+        <div class="row">
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-primary" id="button1">Mostrar Alumnos</button>
+            </div>
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-secondary" id="button2">Arbol de Estudiantes</button>
+            </div>
+            <div class="col-sm-4">
+                <input type="file" id="json-file-input" accept=".json">
+                <button id="load-json-btn">Carga Masiva</button>
+            </div>
+        </div>
+        <br>
+        <table class="table" id="table">
+
+        </table>
+    </div>
+
+    <!-- Link to Bootstrap JS file -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script src="Login.js" type="module"></script>
+    <script src="AdminPage/AdminPage.js" type="module"></script>
+    
+    <!-- <script src="Arboles/AVLTree.js"></script>
+    <script src="Arboles/ListaCircular.js"></script>
+    <script src="Arboles/Nodo/Estudiante.js"></script> -->
+    
 </body>
+
 </html>
