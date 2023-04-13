@@ -1,65 +1,42 @@
 import AVLTree from '../Arboles/AVLTree.js'
+import Estudiante from '../Arboles/Nodo/Estudiante.js'
+import { hiddeAll } from '../Login.js';
 
 const mostrarAlumnos = document.getElementById('button1');
 const arbolEstudiantes = document.getElementById('button2');
 const cargaMasiva = document.getElementById('load-json-btn');
-let arbolAVL = new AVLTree();
+const logOut = document.getElementById('log-out');
 
+const preOrder = document.getElementById('pre-order');
+const inOrder = document.getElementById('in-order');
+const postOrder = document.getElementById('post-order');
+
+
+let arbolAVL = new AVLTree();
+export{arbolAVL};
 
 const table = document.getElementById('table');
 
-const newContent = `
-<tr>
-<td>4</td>
-<td>Jane</td>
-<td>Doe</td>
-<td>@jane</td>
-</tr>
-<tr>
-<td>5</td>
-<td>John</td>
-<td>Smith</td>
-<td>@john</td>
-</tr>
-`;
+
 
 mostrarAlumnos.addEventListener('click', () => {
-    table.hidden = false;
-    table.innerHTML = `
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Product Name</th>
-      <th>Price</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Product 1</td>
-      <td>$100</td>
-      <td>Description 1</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Product 2</td>
-      <td>$200</td>
-      <td>Description 2</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>Product 3</td>
-      <td>$300</td>
-      <td>Description 3</td>
-    </tr>
-    ${newContent}
-  </tbody>
-`;
+    table.hidden = true;
+    document.getElementById('ordenamientos').hidden = false;
+    document.getElementById('reporte-avl').hidden = true;
+
 });
 
 arbolEstudiantes.addEventListener('click', () => {
     table.hidden = true;
+    document.getElementById('ordenamientos').hidden = true;
+    document.getElementById('reporte-avl').hidden = false;
+    let graph = `digraph G{\nrankdir=UD\nnode[shape=box]\nconcentrate=true
+        ${arbolAVL.root.getCodigoInterno()}}
+        `
+        
+        
+    document.getElementById('reporte-avl').src = encodeURI("https://quickchart.io/graphviz?graph="+graph);
+    // 
 });
 
 
@@ -78,12 +55,91 @@ cargaMasiva.addEventListener('click', () => {
     reader.onload = () => {
         const jsonData = JSON.parse(reader.result);
         
-        console.log(jsonData);
-        arbolAVL.insert(3);
-        arbolAVL.inOrderTraversal(arbolAVL.root);
+        // console.log(jsonData);
+        
+        jsonData.alumnos.forEach(alumno => {
+            
+            if(!arbolAVL.search(alumno.carnet)){
+
+                arbolAVL.insert(alumno.carnet,new Estudiante(alumno.nombre, alumno.carnet, alumno.password, alumno.Carpeta_Raiz));
+            }
+            
+            
+        });
+        let graph = `digraph G{\nrankdir=UD\nnode[shape=box]\nconcentrate=true
+            ${arbolAVL.root.getCodigoInterno()}}
+            `
+        // console.log(arbolAVL.size());
+        // arbolAVL.tmp = "";
+        // arbolAVL.inOrderTraversal(arbolAVL.root);
+        // console.log(graph);
+        
     };
     reader.onerror = () => {
         console.error('Error loading JSON file.');
     };
     reader.readAsText(file);
+});
+
+
+preOrder.addEventListener('click', () => {
+    arbolAVL.tmp = "";
+    arbolAVL.preOrderTraversal(arbolAVL.root);
+    table.hidden = false;
+    document.getElementById('ordenamientos').hidden = false;
+    document.getElementById('reporte-avl').hidden = true;
+    table.innerHTML = `
+    <thead>
+        <tr>
+        <th>Carné</th>
+        <th>Nombre</th>
+        </tr>
+    </thead>
+    <tbody>
+    ${arbolAVL.tmp}
+  </tbody>
+`;
+});
+
+inOrder.addEventListener('click', () => {
+    arbolAVL.tmp = "";
+    arbolAVL.inOrderTraversal(arbolAVL.root);
+    table.hidden = false;
+    document.getElementById('reporte-avl').hidden = true;
+    table.innerHTML = `
+    <thead>
+        <tr>
+        <th>Carné</th>
+        <th>Nombre</th>
+        </tr>
+    </thead>
+    <tbody>
+    ${arbolAVL.tmp}
+  </tbody>
+`;
+});
+
+postOrder.addEventListener('click', () => {
+    arbolAVL.tmp = "";
+    arbolAVL.postOrderTraversal(arbolAVL.root);
+    table.hidden = false;
+    document.getElementById('reporte-avl').hidden = true;
+    table.innerHTML = `
+    <thead>
+        <tr>
+        <th>Carné</th>
+        <th>Nombre</th>
+        </tr>
+    </thead>
+    <tbody>
+    ${arbolAVL.tmp}
+  </tbody>
+`;
+});
+
+
+logOut.addEventListener('click', () => {
+    hiddeAll();
+    document.getElementById('login-div').hidden = false;
+    
 });

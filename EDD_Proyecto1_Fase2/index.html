@@ -32,8 +32,14 @@
     </div>
     <br>
 
-    <div class="ocultar-div" id="admin-div">
-        <h1>Button and Table Example</h1>
+    <div class="admin-div ocultar-div" id="admin-div">
+        <div class="col-sm-4">
+            <button type="button" class="btn btn-secondary salir" id="log-out">Salir</button>
+        </div>
+        <h1>Pantalla del Administrador</h1>
+
+        <br>
+        <br>
         <div class="row">
             <div class="col-sm-4">
                 <button type="button" class="btn btn-primary" id="button1">Mostrar Alumnos</button>
@@ -45,12 +51,76 @@
                 <input type="file" id="json-file-input" accept=".json">
                 <button id="load-json-btn">Carga Masiva</button>
             </div>
+
         </div>
         <br>
+
+        <div class="row" id="ordenamientos">
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-block" id="pre-order">Pre-Orden</button>
+            </div>
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-block" id="in-order">In-Orden</button>
+            </div>
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-block" id="post-order">Post-Orden</button>
+            </div>
+        </div>
+
         <table class="table" id="table">
 
         </table>
+        <img id="reporte-avl" src="" alt="Description of the image" class="reporte-avl">
+
     </div>
+
+    <br>
+
+    <div class="user-div ocultar-div" id="user-div">
+        <div class="col-sm-4">
+            <button type="button" class="btn btn-secondary salir" id="log-out2">Salir</button>
+        </div>
+        <h1>Pantalla de Usuario</h1>
+        <br>
+        <br>
+
+        <div class="search-field">
+        <label for="fname"><b>Ruta:</b></label>
+        <input type="text" id="fname" name="fname" value="/">
+        </div>
+
+        <div class="wrapper">
+            <div class="button-menu">
+                <h1 id="welcome"></h1>
+                <div class="col-sm-6 button-folder">
+                    <button type="button" class="btn btn-primary create-folder" id="boton-crear-carpeta">Crear Carpeta</button>
+                </div>
+                <div class="col-sm-7 button-folder">
+                    <button type="button" class="btn btn-primary remove-folder" id="boton-eliminar-carpeta">Eliminar Carpeta</button>
+                </div>
+            </div>
+    
+    
+            <div class="folder-files">
+                <!-- <h1>archivos</h1> -->
+            </div>
+
+        </div>
+
+
+
+        <div class="folder-report">
+            <div class="report-folder">
+                <button type="button" class="btn" id="boton-crear-carpeta">Reporte Carpetas</button>
+            </div>
+            <div class="report-files">
+                <button type="button" class="btn tmp " id="boton-eliminar-carpeta">Reporte Archivos</button>
+            </div>
+        </div>
+
+
+    </div>
+    
 
     <!-- Link to Bootstrap JS file -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -62,7 +132,7 @@
 
     <script src="Login.js" type="module"></script>
     <script src="AdminPage/AdminPage.js" type="module"></script>
-    
+    <script src="UserPage/UserPage.js" type="module"></script>
     <!-- <script src="Arboles/AVLTree.js"></script>
     <script src="Arboles/ListaCircular.js"></script>
     <script src="Arboles/Nodo/Estudiante.js"></script> -->

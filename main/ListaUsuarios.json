@@ -1,6 +1,150 @@
 {
     "alumnos": [
         {
+            "nombre": "Evelyn Gomez",
+            "carnet": 201858402,
+            "password": "E1pLW7Nc0TnU",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Aaliyah Moore",
+            "carnet": 201742965,
+            "password": "d$L12RnW7zkG",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Noah Hernandez",
+            "carnet": 201609356,
+            "password": "2tPmYm\u00265rW3c",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Abigail Wilson",
+            "carnet": 201105167,
+            "password": "bhAe2Ql#A4ez",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Liam Perez",
+            "carnet": 201775582,
+            "password": "7c%Z1dWs9bYi",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Jonathan Martin",
+            "carnet": 201834501,
+            "password": "xQ0z#wyVLwmp",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Elizabeth Perkins",
+            "carnet": 201082516,
+            "password": "1pBnT%\u0026UZB6X",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Mason Evans",
+            "carnet": 201181267,
+            "password": "9vU6suPQ6Bpy",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Madison Santos",
+            "carnet": 201733437,
+            "password": "xcsar23xs",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Marin Leon",
+            "carnet": 203100004,
+            "password": "wer4sdvs",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Francisco paez",
+            "carnet": 203100003,
+            "password": "xcvsdsdfs",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Ronald Mckay",
+            "carnet": 203100002,
+            "password": "aaasdfw",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Fernando Cordon",
+            "carnet": 203100001,
+            "password": "kdjfskksi",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Michaela Castro",
+            "carnet": 201052784,
+            "password": "bg40fY\u0026rsSsp",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Olivia Clark",
+            "carnet": 201510233,
+            "password": "HwFn7E$5vRxb",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Jacob Smith",
+            "carnet": 201845056,
+            "password": "r0ZtO5XtY5Da",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Alexander Taylor",
+            "carnet": 201228103,
+            "password": "9xL5gXaS4pKj",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Emma Smith",
+            "carnet": 201902201,
+            "password": "8kn%!wNLcVXM",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Ethan Johnson",
+            "carnet": 201624655,
+            "password": "8KFfjZuG7Vhs",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Camila Pacheco",
+            "carnet": 201295325,
+            "password": "rUh8q3WwGh1L",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Julian Lewis",
+            "carnet": 201268474,
+            "password": "Z1dxNvL$90Qe",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Samantha Nguyen",
+            "carnet": 201502132,
+            "password": "FzFVpfi#1GRl",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Landon Dominguez",
+            "carnet": 201834323,
+            "password": "jfIXb85goT1j",
+            "Carpeta_Raiz": "/"
+        },
+        {
+            "nombre": "Natalia Romero",
+            "carnet": 201154386,
+            "password": "xSY0U6!XU6Kv",
+            "Carpeta_Raiz": "/"
+        },
+        {
             "nombre": "Isabella Weber",
             "carnet": 201284666,
             "password": "6OAtts#68ysE",

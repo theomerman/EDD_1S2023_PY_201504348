@@ -1,3 +1,5 @@
+import AVLTree from "./Arboles/AVLTree.js";
+import { arbolAVL } from "./AdminPage/AdminPage.js";
 
 
 // Get the login form element
@@ -6,30 +8,53 @@ const loginForm = document.querySelector('#login-form');
 //divs
 const loginDiv = document.getElementById('login-div');
 const adminDashboard = document.getElementById('admin-div');
+const reporteAVL = document.getElementById('reporte-avl')
+const ordenamientos = document.getElementById('ordenamientos');
 
-// let es = new Estudiante();
+const userDashboard = document.getElementById('user-div');
+
+let username = "";
+// export {username};
+
+let currentUser;
+export {currentUser}
+
+var nTreeNode;
+export {nTreeNode};
 
 
-// avl.insert(new Node());
 
-// Add an event listener to the login form submission
 loginForm.addEventListener('submit', (event) => {
     // Prevent the default form submission behavior
     event.preventDefault();
 
-    // Get the username and password input values
-    const username = document.querySelector('#username').value;
+    username = document.querySelector('#username').value;
     const password = document.querySelector('#password').value;
+    
+    currentUser = arbolAVL.search(parseInt(username));
 
-    // Check if the username and password are correct
+    
+
     if (username === 'admin' && password === 'admin') {
-        // Redirect the user to another page
-        // window.location.href = 'AdminPage/dashboard.html';
+
         loginDiv.hidden = true;
+        userDashboard.hidden = true;
         adminDashboard.hidden = false;
         
+    }else if(currentUser){
+        if(currentUser.estudiante.password === password){
+            loginDiv.hidden = true;
+            userDashboard.hidden = false; 
+            adminDashboard.hidden = true;
+            document.getElementById('fname').value = '/';
+            document.getElementById('welcome').innerHTML = `Bienvenido ${currentUser.estudiante.nombre}`;
+            nTreeNode = currentUser.estudiante.nTree.root;
+        }else{
+            alert('Invalid username or password. Please try again.');
+        }
+
     } else {
-        // Display an error message
+        
         alert('Invalid username or password. Please try again.');
     }
 });
@@ -37,11 +62,14 @@ loginForm.addEventListener('submit', (event) => {
 
 
 
-// loginDiv.hidden = true;
-function ocultarTodo(){
-    adminDashboard.hidden = true;
 
+function hiddeAll(){
+    adminDashboard.hidden = true;
+    reporteAVL.hidden = true;
+    ordenamientos.hidden = true;
+    userDashboard.hidden = true
 }
-ocultarTodo();
+// hiddeAll();
+export{hiddeAll}
 
 

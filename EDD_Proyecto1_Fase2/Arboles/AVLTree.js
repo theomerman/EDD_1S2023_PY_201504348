@@ -1,15 +1,33 @@
 class Node {
-    constructor(value) {
+    constructor(value, estudiante,contadorGraphviz) {
         this.value = value;
         this.left = null;
         this.right = null;
         this.height = 1;
+        this.estudiante = estudiante;
+        this.contadorGraphviz = contadorGraphviz;
     }
+    getCodigoInterno(){
+        let etiqueta;
+        etiqueta =`nodo${this.contadorGraphviz} [ label = " ${this.value} \n ${this.estudiante.nombre} \n Altura: ${this.height} "];\n`;
+        if (this.left != null) {
+        etiqueta = etiqueta + this.left.getCodigoInterno()
+                + "nodo" + this.contadorGraphviz + "->nodo" + this.left.contadorGraphviz + "\n";
+    }
+        if (this.right != null) {
+            etiqueta = etiqueta + this.right.getCodigoInterno()
+                    + "nodo" + this.contadorGraphviz + "->nodo" + this.right.contadorGraphviz + "\n";
+        }
+        return etiqueta;
+        }
 }
 
 export default class AVLTree {
     constructor() {
         this.root = null;
+        this.tmp = "";
+        this.graph = ""; 
+        this.contadorGraphviz = 0;
     }
 
     // obtener la altura del nodo
@@ -51,18 +69,19 @@ export default class AVLTree {
     }
 
     // instartar un nodo
-    insert(value) {
-        this.root = this.insertNode(this.root, value);
+    insert(value, estudiante) {
+        this.root = this.insertNode(this.root, value, estudiante);
     }
 
-    insertNode(node, value) {
+    insertNode(node, value, estudiante) {
         if (node == null) {
-            return new Node(value);
+            this.contadorGraphviz += 1;
+            return new Node(value, estudiante, this.contadorGraphviz);
         }
         if (value < node.value) {
-            node.left = this.insertNode(node.left, value);
+            node.left = this.insertNode(node.left, value,estudiante);
         } else {
-            node.right = this.insertNode(node.right, value);
+            node.right = this.insertNode(node.right, value,estudiante);
         }
         node.height = 1 + Math.max(this.height(node.left), this.height(node.right));
         let balanceFactor = this.balanceFactor(node);
@@ -147,19 +166,49 @@ export default class AVLTree {
         return node;
     }
 
+
+    search(value) {
+        let current = this.root;
+        while (current !== null) {
+        if (value === current.value) {
+            return current;
+        } else if (value < current.value) {
+            current = current.left;
+        } else {
+            current = current.right;
+        }
+        }
+        return null;
+    }
+
     // in-order traversal
     inOrderTraversal(node) {
         if (node != null) {
             this.inOrderTraversal(node.left);
-            console.log(node.value);
+            // console.log(node.value);
+            // console.log(node.estudiante);
+            this.tmp += `
+            <tr>
+                <td>${node.estudiante.carne}</td>
+                <td>${node.estudiante.nombre}</td>
+            </tr>
+            `;
+
             this.inOrderTraversal(node.right);
         }
     }
 
     // pre-order traversal
+    
     preOrderTraversal(node) {
         if (node != null) {
-            console.log(node.value);
+            // console.log(node.value);
+            this.tmp += `
+            <tr>
+                <td>${node.estudiante.carne}</td>
+                <td>${node.estudiante.nombre}</td>
+            </tr>
+            `;
             this.preOrderTraversal(node.left);
             this.preOrderTraversal(node.right);
         }
@@ -170,9 +219,22 @@ export default class AVLTree {
         if (node != null) {
             this.postOrderTraversal(node.left);
             this.postOrderTraversal(node.right);
-            console.log(node.value);
+            // console.log(node.value);
+            this.tmp += `
+            <tr>
+                <td>${node.estudiante.carne}</td>
+                <td>${node.estudiante.nombre}</td>
+            </tr>
+            `;
         }
     }
+    size(node = this.root) {
+        if (node === null) {
+          return 0;
+        } else {
+          return 1 + this.size(node.left) + this.size(node.right);
+        }
+      }
 }
 
 

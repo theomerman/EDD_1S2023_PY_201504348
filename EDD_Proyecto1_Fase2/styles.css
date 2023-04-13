@@ -14,10 +14,35 @@ body {
     margin-top: 50px;
     
 }
+.admin-div{
+    max-width: 1500px;
+    border: 1px solid black;
+    padding: 10px;
+    
+    background-color: dimgray;
+    margin: auto;
+}
+.reporte-avl{
+    width: 100%;
+}
+
+.user-div{
+    max-width: 1500px;
+    border: 1px solid black;
+    padding: 10px;
+    
+    background-color: dimgray;
+    margin: auto;
+}
+
+.salir{
+    background-color: red;
+}
+
 
 h1 {
     text-align: center;
-    margin-top: 50px;
+    /* margin-top: 50px; */
 }
 
 table {
@@ -28,3 +53,67 @@ table {
 .hide {
     display: none;
 }
+
+.search-field{
+    /* background-color: blue; */
+    margin: auto;
+    max-width: 25%;
+    font-size: larger;
+}
+
+.button-menu{
+    margin: auto;
+    width: 20%;
+    margin-left: 5%;
+    background-color: rgb(207, 216, 220);
+}
+
+.folder-files{
+    background-color: white;
+    margin: auto;
+    width: 65%;
+    margin-right: 5%;
+    height: 500px;
+}
+
+.wrapper {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.button-folder{
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+
+.create-folder{
+    background: rgb(118, 255, 3);
+    color: black;
+    
+}
+.remove-folder{
+    background-color: rgb(255, 61, 0);
+}
+
+.folder-report{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    /* background-color: blue; */
+    margin-left: 30%;
+    margin-right: 40%; 
+}
+
+.report-folder{
+    margin: auto;
+    background-color: blue;
+}
+.report-files{
+    background-color: white;
+    margin: auto;
+}
+
