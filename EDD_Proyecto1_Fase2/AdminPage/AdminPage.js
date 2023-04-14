@@ -13,7 +13,7 @@ const postOrder = document.getElementById('post-order');
 
 
 let arbolAVL = new AVLTree();
-export{arbolAVL};
+export { arbolAVL };
 
 const table = document.getElementById('table');
 
@@ -33,9 +33,9 @@ arbolEstudiantes.addEventListener('click', () => {
     let graph = `digraph G{\nrankdir=UD\nnode[shape=box]\nconcentrate=true
         ${arbolAVL.root.getCodigoInterno()}}
         `
-        
-        
-    document.getElementById('reporte-avl').src = encodeURI("https://quickchart.io/graphviz?graph="+graph);
+
+
+    document.getElementById('reporte-avl').src = encodeURI("https://quickchart.io/graphviz?graph=" + graph);
     // 
 });
 
@@ -54,18 +54,19 @@ cargaMasiva.addEventListener('click', () => {
     const reader = new FileReader();
     reader.onload = () => {
         const jsonData = JSON.parse(reader.result);
-        
-        // console.log(jsonData);
-        
-        jsonData.alumnos.forEach(alumno => {
-            
-            if(!arbolAVL.search(alumno.carnet)){
 
-                arbolAVL.insert(alumno.carnet,new Estudiante(alumno.nombre, alumno.carnet, alumno.password, alumno.Carpeta_Raiz));
+        // console.log(jsonData);
+
+        jsonData.alumnos.forEach(alumno => {
+
+            if (!arbolAVL.search(alumno.carnet)) {
+
+                arbolAVL.insert(alumno.carnet, new Estudiante(alumno.nombre, alumno.carnet, alumno.password, alumno.Carpeta_Raiz));
             }
-            
-            
+
+
         });
+        alert('Se cargaron los alumnos exitosamente')
         let graph = `digraph G{\nrankdir=UD\nnode[shape=box]\nconcentrate=true
             ${arbolAVL.root.getCodigoInterno()}}
             `
@@ -73,7 +74,7 @@ cargaMasiva.addEventListener('click', () => {
         // arbolAVL.tmp = "";
         // arbolAVL.inOrderTraversal(arbolAVL.root);
         // console.log(graph);
-        
+
     };
     reader.onerror = () => {
         console.error('Error loading JSON file.');
@@ -141,5 +142,6 @@ postOrder.addEventListener('click', () => {
 logOut.addEventListener('click', () => {
     hiddeAll();
     document.getElementById('login-div').hidden = false;
-    
+
 });
+

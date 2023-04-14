@@ -74,6 +74,8 @@ table {
     width: 65%;
     margin-right: 5%;
     height: 500px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .wrapper {
@@ -117,3 +119,34 @@ table {
     margin: auto;
 }
 
+.folder {
+    width: 100px;
+    height: 70px;
+    /* border: 2px solid #CCC; */
+    position: relative;
+    text-align: center;
+    background-size: 75%;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 10px;
+}
+
+.folder p {
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    right: 0;
+    margin: 0;
+    font-size: 14px;
+    color: #080808;
+}
+
+.reporte-carpetas-archivos-div{
+    /* background-color: blue; */
+    margin: auto;
+    width: 65%;
+    margin-right: 5%;
+    height: 500px;
+    display: flex;
+    flex-wrap: wrap;
+}

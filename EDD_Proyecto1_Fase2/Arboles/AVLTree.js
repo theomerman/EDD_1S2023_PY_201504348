@@ -1,5 +1,5 @@
 class Node {
-    constructor(value, estudiante,contadorGraphviz) {
+    constructor(value, estudiante, contadorGraphviz) {
         this.value = value;
         this.left = null;
         this.right = null;
@@ -7,26 +7,26 @@ class Node {
         this.estudiante = estudiante;
         this.contadorGraphviz = contadorGraphviz;
     }
-    getCodigoInterno(){
+    getCodigoInterno() {
         let etiqueta;
-        etiqueta =`nodo${this.contadorGraphviz} [ label = " ${this.value} \n ${this.estudiante.nombre} \n Altura: ${this.height} "];\n`;
+        etiqueta = `nodo${this.contadorGraphviz} [ label = " ${this.value} \n ${this.estudiante.nombre} \n Altura: ${this.height} "];\n`;
         if (this.left != null) {
-        etiqueta = etiqueta + this.left.getCodigoInterno()
+            etiqueta = etiqueta + this.left.getCodigoInterno()
                 + "nodo" + this.contadorGraphviz + "->nodo" + this.left.contadorGraphviz + "\n";
-    }
+        }
         if (this.right != null) {
             etiqueta = etiqueta + this.right.getCodigoInterno()
-                    + "nodo" + this.contadorGraphviz + "->nodo" + this.right.contadorGraphviz + "\n";
+                + "nodo" + this.contadorGraphviz + "->nodo" + this.right.contadorGraphviz + "\n";
         }
         return etiqueta;
-        }
+    }
 }
 
 export default class AVLTree {
     constructor() {
         this.root = null;
         this.tmp = "";
-        this.graph = ""; 
+        this.graph = "";
         this.contadorGraphviz = 0;
     }
 
@@ -79,9 +79,9 @@ export default class AVLTree {
             return new Node(value, estudiante, this.contadorGraphviz);
         }
         if (value < node.value) {
-            node.left = this.insertNode(node.left, value,estudiante);
+            node.left = this.insertNode(node.left, value, estudiante);
         } else {
-            node.right = this.insertNode(node.right, value,estudiante);
+            node.right = this.insertNode(node.right, value, estudiante);
         }
         node.height = 1 + Math.max(this.height(node.left), this.height(node.right));
         let balanceFactor = this.balanceFactor(node);
@@ -170,13 +170,13 @@ export default class AVLTree {
     search(value) {
         let current = this.root;
         while (current !== null) {
-        if (value === current.value) {
-            return current;
-        } else if (value < current.value) {
-            current = current.left;
-        } else {
-            current = current.right;
-        }
+            if (value === current.value) {
+                return current;
+            } else if (value < current.value) {
+                current = current.left;
+            } else {
+                current = current.right;
+            }
         }
         return null;
     }
@@ -199,7 +199,7 @@ export default class AVLTree {
     }
 
     // pre-order traversal
-    
+
     preOrderTraversal(node) {
         if (node != null) {
             // console.log(node.value);
@@ -230,11 +230,11 @@ export default class AVLTree {
     }
     size(node = this.root) {
         if (node === null) {
-          return 0;
+            return 0;
         } else {
-          return 1 + this.size(node.left) + this.size(node.right);
+            return 1 + this.size(node.left) + this.size(node.right);
         }
-      }
+    }
 }
 
 

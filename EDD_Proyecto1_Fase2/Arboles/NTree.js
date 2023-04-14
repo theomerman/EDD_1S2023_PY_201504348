@@ -10,20 +10,6 @@ class Node {
         this.children.push(node);
     }
 
-    getCodigoInterno(){
-        let etiqueta;
-        etiqueta =`nodo${this.contadorGraphviz} [ label = " ${this.value} \n ${this.estudiante.nombre} \n Altura: ${this.height} "];\n`;
-        if (this.left != null) {
-        etiqueta = etiqueta + this.left.getCodigoInterno()
-                + "nodo" + this.contadorGraphviz + "->nodo" + this.left.contadorGraphviz + "\n";
-    }
-        if (this.right != null) {
-            etiqueta = etiqueta + this.right.getCodigoInterno()
-                    + "nodo" + this.contadorGraphviz + "->nodo" + this.right.contadorGraphviz + "\n";
-        }
-        return etiqueta;
-        }
-
 }
 
 export default class Tree {
@@ -52,9 +38,15 @@ export default class Tree {
         }
     }
 
-
-
 }
+
+
+
+
+
+
+
+
 
 // const tree = new Tree(1);
 // const node2 = new Node(2);

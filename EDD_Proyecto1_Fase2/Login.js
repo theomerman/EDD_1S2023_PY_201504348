@@ -17,10 +17,10 @@ let username = "";
 // export {username};
 
 let currentUser;
-export {currentUser}
+export { currentUser }
 
 var nTreeNode;
-export {nTreeNode};
+export { nTreeNode };
 
 
 
@@ -30,31 +30,33 @@ loginForm.addEventListener('submit', (event) => {
 
     username = document.querySelector('#username').value;
     const password = document.querySelector('#password').value;
-    
+
     currentUser = arbolAVL.search(parseInt(username));
 
-    
+
 
     if (username === 'admin' && password === 'admin') {
 
         loginDiv.hidden = true;
         userDashboard.hidden = true;
         adminDashboard.hidden = false;
-        
-    }else if(currentUser){
-        if(currentUser.estudiante.password === password){
+
+    } else if (currentUser) {
+        if (currentUser.estudiante.password === password) {
             loginDiv.hidden = true;
-            userDashboard.hidden = false; 
+            userDashboard.hidden = false;
             adminDashboard.hidden = true;
             document.getElementById('fname').value = '/';
             document.getElementById('welcome').innerHTML = `Bienvenido ${currentUser.estudiante.nombre}`;
             nTreeNode = currentUser.estudiante.nTree.root;
-        }else{
+            document.getElementById('folder-files-div').innerHTML = '';
+            document.getElementById('reporte-ntree').hidden = true;
+        } else {
             alert('Invalid username or password. Please try again.');
         }
 
     } else {
-        
+
         alert('Invalid username or password. Please try again.');
     }
 });
@@ -63,13 +65,13 @@ loginForm.addEventListener('submit', (event) => {
 
 
 
-function hiddeAll(){
+function hiddeAll() {
     adminDashboard.hidden = true;
     reporteAVL.hidden = true;
     ordenamientos.hidden = true;
     userDashboard.hidden = true
 }
-// hiddeAll();
-export{hiddeAll}
+hiddeAll();
+export { hiddeAll }
 
 

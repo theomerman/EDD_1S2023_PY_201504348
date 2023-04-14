@@ -70,7 +70,7 @@
         <table class="table" id="table">
 
         </table>
-        <img id="reporte-avl" src="" alt="Description of the image" class="reporte-avl">
+        <img id="reporte-avl" src="" alt="Arbol AVL" class="reporte-avl">
 
     </div>
 
@@ -98,23 +98,29 @@
                 <div class="col-sm-7 button-folder">
                     <button type="button" class="btn btn-primary remove-folder" id="boton-eliminar-carpeta">Eliminar Carpeta</button>
                 </div>
-            </div>
-    
-    
-            <div class="folder-files">
-                <!-- <h1>archivos</h1> -->
-            </div>
+                <div class="col-sm-4">
+                    <input type="file" id="myFileInput" accept=".jpg .pdf .txt">
+                    
 
+                    <button id="upload-file">Subir Archivo</button>
+                </div>
+            </div>
+    
+    
+            <div class="folder-files" id="folder-files-div"></div>
+
+            <!-- <div class="reporte-carpetas-archivos-div" id="" src=""></div> -->
+            <img id="reporte-ntree" src="" alt="Reporte Arbol N-ario" class="reporte-carpetas-archivos-div">
         </div>
 
 
 
         <div class="folder-report">
             <div class="report-folder">
-                <button type="button" class="btn" id="boton-crear-carpeta">Reporte Carpetas</button>
+                <button type="button" class="btn" id="boton-reporte-carpeta">Reporte Carpetas</button>
             </div>
             <div class="report-files">
-                <button type="button" class="btn tmp " id="boton-eliminar-carpeta">Reporte Archivos</button>
+                <button type="button" class="btn tmp " id="boton-reporte-archivos">Bitacora</button>
             </div>
         </div>
 
