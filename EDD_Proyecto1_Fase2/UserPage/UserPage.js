@@ -92,7 +92,7 @@ function removeFolder(removeFolder) {
         if (removeFolder === currentFolder.children[i].value) {
             currentFolder.children.splice(i, 1);
             generateFolders();
-            currentUser.estudiante.bitacora.insert(`Se creo eliminó \n\\"${removeFolder}\\"
+            currentUser.estudiante.bitacora.insert(`Se eliminó \n\\"${removeFolder}\\"
 Fecha: ${date.getDate() + '-' + Number(date.getMonth()) + 1 + '-' + date.getFullYear()}
 Hora: ${date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()}`);
 
