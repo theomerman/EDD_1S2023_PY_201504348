@@ -1,6 +1,5 @@
-# Manual Técnico y de Usuario
 
-## Manual Técnico
+# Manual Técnico
 ### Árbol N-Ario
 El manual técnico muestra en detalle la implementacion de cada uno de los métodos más importantes en este programa. Empezamos explicando la implementación del árbol n-ario:
 
@@ -183,7 +182,7 @@ export default class Estudiante {
 }
 ```
 
-## Manual de Usuario
+# Manual de Usuario
 ### Pantalla de inicio
 En la pantalla de inicio podremos iniciar sesión con nuestro usuario aunque al principio el único usuario agregado es el de administrador así que tendremos que iniciar sesión como administrador y cargar los usuarios desde este menú.
 
