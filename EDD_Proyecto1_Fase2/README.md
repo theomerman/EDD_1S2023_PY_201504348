@@ -120,7 +120,7 @@ Verifica si el nodo es nulo (es decir, si el árbol está vacío) y, en ese caso
 Si el nodo no es nulo, devuelve la diferencia entre la altura del subárbol izquierdo y la altura del subárbol derecho del nodo. Esto se calcula restando la altura del hijo derecho del nodo de la altura del hijo izquierdo del nodo.
 
 
-```
+```javascript
   getBalanceFactor(node) {
     if (node === null) {
       return 0;
