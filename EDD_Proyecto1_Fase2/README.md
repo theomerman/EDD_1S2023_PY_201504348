@@ -5,7 +5,7 @@ El manual técnico muestra en detalle la implementacion de cada uno de los méto
 
 Un árbol es una estructura de datos que se compone de nodos interconectados. El nodo superior se llama raíz y los nodos inferiores se llaman nodos hijos. Cada nodo puede tener cero o más nodos hijos, y los nodos que no tienen hijos se llaman nodos hoja. La conexión entre los nodos se llama arista o borde, y el número máximo de hijos que puede tener un nodo se llama grado del árbol. Si cada nodo tiene un grado máximo de 2, entonces el árbol se llama árbol binario.
 
-```
+```javascript
 class TreeNode {
   constructor(value) {
     this.value = value;
@@ -54,14 +54,14 @@ Aquí hay un ejemplo de un árbol de búsqueda binario que contiene los valores 
 ### Carga de JSON
 Tenemos un objeto JSON con un array alumnos que contiene tres objetos, cada uno representando a un estudiante. Podemos iterar sobre el array utilizando un bucle for o el método forEach().
 
-```
+```javascript
 jsonData.alumnos.forEach(alumno => {
   console.log(alumno.nombre + " - " + alumno.carnet);
 });
 ```
 ### Árbol AVL
 Ahora veremos la impolementación del árbol AVL el cual empezamos por ver el nodo que se utilizó para rellenar el árbol
-```
+```javascript
 class Node {
     constructor(value, estudiante, contadorGraphviz) {
         this.value = value;
@@ -91,7 +91,7 @@ Tambien podemos observar que se implementó una funcion llamada getCodigoInterno
 ### Carga de JSON
 Ahora vemos esta función se utiliza para realizar una rotación hacia la derecha en un árbol AVL. La rotación hacia la derecha se utiliza para equilibrar un árbol AVL que ha sido desequilibrado por un subárbol izquierdo pesado.
 
-```
+```javascript
 rotateRight(node) {
     let left = node.left;
     let rightOfLeft = left.right;
@@ -104,7 +104,7 @@ rotateRight(node) {
 ```
 Aquí, el cálculo de altura se realiza utilizando la función "height" de la clase AVL que es responsable de calcular la altura del nodo y puede ser diferente para diferentes implementaciones.
 
-```
+```javascript
   getHeight(node) {
     if (node === null) {
       return 0;
@@ -130,7 +130,7 @@ Si el nodo no es nulo, devuelve la diferencia entre la altura del subárbol izqu
 ```
 La lista circular doble es una estructura de datos en la que cada elemento está conectado tanto con el elemento anterior como con el siguiente en la lista. Además, el último elemento de la lista está conectado con el primer elemento, formando así un ciclo continuo. En este caso se utilizó para guardar la bitácora de los usuarios y en donde se almacenaron los archivos
 
-```
+```javascript
 class Node {
   constructor(value) {
     this.value = value;
@@ -168,7 +168,7 @@ La función append() agrega un nodo a la lista a la cabeza de esta.
 
 En esta clase se puede observar el objeto Estudiante el cual es el que se usa para poder almacenar todas las estructuras como la información de cada usuario y el árbol n-ario y la lista circular.
 
-```
+```javascript
 export default class Estudiante {
     constructor(nombre, carne, password, carpetaRaiz) {
         this.nombre = nombre;
