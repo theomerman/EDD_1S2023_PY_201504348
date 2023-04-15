@@ -30,7 +30,7 @@ loginForm.addEventListener('submit', (event) => {
 
     username = document.querySelector('#username').value;
     const password = document.querySelector('#password').value;
-
+    
     currentUser = arbolAVL.search(parseInt(username));
 
 
@@ -42,7 +42,7 @@ loginForm.addEventListener('submit', (event) => {
         adminDashboard.hidden = false;
 
     } else if (currentUser) {
-        if (currentUser.estudiante.password === password) {
+        if (currentUser.estudiante.password == password) {
             loginDiv.hidden = true;
             userDashboard.hidden = false;
             adminDashboard.hidden = true;

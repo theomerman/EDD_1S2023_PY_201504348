@@ -62,6 +62,7 @@ cargaMasiva.addEventListener('click', () => {
             if (!arbolAVL.search(alumno.carnet)) {
 
                 arbolAVL.insert(alumno.carnet, new Estudiante(alumno.nombre, alumno.carnet, alumno.password, alumno.Carpeta_Raiz));
+                
             }
 
 

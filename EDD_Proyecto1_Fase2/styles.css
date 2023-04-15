@@ -1,9 +1,12 @@
 html,
 body {
     height: 100%;
-    background-color: dimgray;
+    background-color: white;
 }
 
+.login-div{
+    background-color: rgb(118, 255, 3);
+}
 
 .login-form {
     max-width: 450px;
@@ -12,14 +15,12 @@ body {
     padding: 10px;
     margin: auto;
     margin-top: 50px;
-    
 }
 .admin-div{
     max-width: 1500px;
     border: 1px solid black;
     padding: 10px;
-    
-    background-color: dimgray;
+    background-color: rgb(209, 196, 233);
     margin: auto;
 }
 .reporte-avl{
@@ -31,7 +32,7 @@ body {
     border: 1px solid black;
     padding: 10px;
     
-    background-color: dimgray;
+    background-color: rgb(255, 215, 64);
     margin: auto;
 }
 
@@ -65,7 +66,8 @@ table {
     margin: auto;
     width: 20%;
     margin-left: 5%;
-    background-color: rgb(207, 216, 220);
+    border: 1px solid black;
+    background-color: rgb(118, 255, 3);
 }
 
 .folder-files{
@@ -76,6 +78,7 @@ table {
     height: 500px;
     display: flex;
     flex-wrap: wrap;
+    border: 1px solid black;
 }
 
 .wrapper {
@@ -92,7 +95,7 @@ table {
 }
 
 .create-folder{
-    background: rgb(118, 255, 3);
+    /* background: rgb(118, 255, 3); */
     color: black;
     
 }
@@ -150,3 +153,8 @@ table {
     display: flex;
     flex-wrap: wrap;
 }
+
+
+.rounded-div {
+    border-radius: 10px; /* adjust this value to control the amount of rounding */
+  }

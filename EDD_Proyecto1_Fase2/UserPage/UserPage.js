@@ -178,6 +178,13 @@ document.getElementById("boton-reporte-archivos").addEventListener('click', () =
     document.getElementById('reporte-ntree').src = encodeURI("https://quickchart.io/graphviz?graph=" + graph);
 });
 
+
+
+
+
+
+
+
 function base64(fileInput) {
     return new Promise((resolve, reject) => {
         const file = fileInput.files[0];
@@ -196,6 +203,12 @@ function base64(fileInput) {
         };
     });
 }
+
+
+
+
+
+
 document.getElementById('upload-file').addEventListener('click', () => {
     const fileInput = document.getElementById("myFileInput");
     let newFolder = fileInput.files[0].name;

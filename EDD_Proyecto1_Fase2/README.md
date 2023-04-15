@@ -89,6 +89,7 @@ class Node {
 ```
 Tambien podemos observar que se implementó una funcion llamada getCodigoInterno() la cual se utiliza para poder graficar el árbol, iterandolo desde la raíz hacia cada nodo hijo de forma recursiva.
 
+### Carga de JSON
 Ahora vemos esta función se utiliza para realizar una rotación hacia la derecha en un árbol AVL. La rotación hacia la derecha se utiliza para equilibrar un árbol AVL que ha sido desequilibrado por un subárbol izquierdo pesado.
 
 ```
@@ -164,28 +165,75 @@ class CircularLinkedList {
 ```
 La función append() agrega un nodo a la lista a la cabeza de esta.
 
-## Usage
+### Nodo Estudiante
 
-```python
-import foobar
+En esta clase se puede observar el objeto Estudiante el cual es el que se usa para poder almacenar todas las estructuras como la información de cada usuario y el árbol n-ario y la lista circular.
 
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
+```
+export default class Estudiante {
+    constructor(nombre, carne, password, carpetaRaiz) {
+        this.nombre = nombre;
+        this.carne = carne;
+        this.password = password;
+        this.carpetaRaiz = carpetaRaiz;
+        this.nTree = new Tree('/');
+        this.bitacora = new CircularLinkedList();
+        this.archivos = new CircularLinkedList();
+    }
+}
 ```
 
-## Contributing
+## Manual de Usuario
+### Pantalla de inicio
+En la pantalla de inicio podremos iniciar sesión con nuestro usuario aunque al principio el único usuario agregado es el de administrador así que tendremos que iniciar sesión como administrador y cargar los usuarios desde este menú.
 
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
+![Alt text](Images/LoginPage.png)
 
-Please make sure to update tests as appropriate.
+### Pantalla del administrador
+En el menú de administrador tenemos otras opciones las cuales nos ayudaran a cargar el archivo JSON con todos los usuarios:
 
-## License
+![Alt text](Images/MenuAdmin.png)
 
-[MIT](https://choosealicense.com/licenses/mit/)
+En la parte derecha podemos presionar un boton para elegir el archivo JSON
+
+![Alt text](Images/CargaMasiva.png)
+
+Una vez presionado nos saldrá una ventana para seleccionar el archivo.
+
+![Alt text](Images/FileChooser.png)
+
+Luego tenemos la opción de mostrar el árbol AVL generado por graphviz en el boton "Arbol de estudiantes".
+
+![Alt text](Images/GraficoAVL.png)
+
+Luego tenemos el boton de "Mostrar Alumnos" que nos muestra los tipos de ordenamientos que cuenta el árbol y un boton para seleccionar cada uno de ellos.
+
+![Alt text](Images/TablaOrdenamientos)
+
+Cada menú tendrá un boton de salir a la izquierda superior de la ventana.
+
+### Pantalla de Usuario
+
+En esta menú podremos ver los diferentes botones para cada una de las funciones como por ejemplo el de crear carpeta que esta de color azúl y nos lanza un mensaje de que introduzcamos el nombre de la carpeta que deseamos crear.
+
+
+![Alt text](Images/PantallaUsuario)
+
+El menú de las carpetas esta compuesto por botones los cuales crean o eliminan las carpetas y archivos del sistema.
+
+![Alt text](Images/MenuCreacion)
+
+![Alt text](Images/Creacion)
+
+
+Al crear varias carpetas se irá actualizando la vista de carpetas y nos mostrará las carpetas que hay en la ruta seleccionada.
+
+![Alt text](Images/Carpetas)
+
+El reporte de carpetas nos muestra el gráfico hecho en graphviz de el sistema de archivos.
+
+![Alt text](Images/ArbolNario)
+
+La bitácora nos muestra el log de todas las acciones que hace el usuario.
+
+![Alt text](Images/Bitacora)
