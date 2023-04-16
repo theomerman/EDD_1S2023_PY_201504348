@@ -9,7 +9,7 @@ class Node {
     }
     getCodigoInterno() {
         let etiqueta;
-        etiqueta = `nodo${this.contadorGraphviz} [ label = " ${this.value} \n ${this.estudiante.nombre} \n Altura: ${this.height} "];\n`;
+        etiqueta = `nodo${this.contadorGraphviz} [ label = " ${this.value} \n ${this.estudiante.nombre} \n Altura: ${this.height - 1} "];\n`;
         if (this.left != null) {
             etiqueta = etiqueta + this.left.getCodigoInterno()
                 + "nodo" + this.contadorGraphviz + "->nodo" + this.left.contadorGraphviz + "\n";

@@ -103,6 +103,10 @@ table {
     background-color: rgb(255, 61, 0);
 }
 
+.ver-archivo{
+    background-color: rgb(234, 128, 252);
+}
+
 .folder-report{
     margin-top: 40px;
     margin-bottom: 40px;

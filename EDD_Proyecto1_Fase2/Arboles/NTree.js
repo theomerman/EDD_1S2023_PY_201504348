@@ -1,9 +1,13 @@
+import { NodeMatrix } from "../SparseMatrix/SparseMatrix.js";
+import { SparseMatrix } from "../SparseMatrix/SparseMatrix.js";
+
 export {Node};
 
 class Node {
     constructor(value) {
         this.value = value;
         this.children = [];
+        this.sparseMatrix = new SparseMatrix(value);
     }
 
     addChild(node) {

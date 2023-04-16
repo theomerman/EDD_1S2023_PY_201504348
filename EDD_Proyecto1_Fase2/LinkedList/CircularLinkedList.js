@@ -52,7 +52,7 @@ splines=ortho\n`;
 
             if (current === this.head) {
                 graph += `nodo${tmp2} -> nodo0;\n}`;
-                console.log(graph);
+                // console.log(graph);
                 return graph;
             }else{
                 graph += `nodo${tmp2} -> nodo${tmp};\n`;

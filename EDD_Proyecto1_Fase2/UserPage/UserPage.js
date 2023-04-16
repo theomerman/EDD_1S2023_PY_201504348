@@ -2,6 +2,8 @@ import { hiddeAll } from "../Login.js";
 import { currentUser } from "../Login.js";
 import { Node } from "../Arboles/NTree.js";
 import { nTreeNode } from "../Login.js";
+import { SparseMatrix } from "../SparseMatrix/SparseMatrix.js";
+import { NodeMatrix } from "../SparseMatrix/SparseMatrix.js";
 
 var currentFolder;
 
@@ -156,13 +158,43 @@ export { generateFolders }
 function generateFolders() {
     let folders = '';
     for (let i = 0; i < currentFolder.children.length; i++) {
-        console.log(currentFolder.children[i].value);
+        // console.log(currentFolder.children[i].value);
         folders += `
         <div class="folder" style="background-image: url('folder.png');">
             <p>${currentFolder.children[i].value}</p>
         </div>
         `
     }
+    let tmp = currentFolder.sparseMatrix.head.down;
+    while(tmp != null){
+        if(tmp.value.indexOf("pdf") >= 0){
+            folders += `
+        <div class="folder" style="background-image: url('pdf.png');">
+            <p>${tmp.value}</p>
+        </div>
+        `
+        }else if(tmp.value.indexOf("txt") >= 0){
+            folders += `
+        <div class="folder" style="background-image: url('txt.png');">
+            <p>${tmp.value}</p>
+        </div>
+        `
+        }else if(tmp.value.indexOf("gif") >= 0){
+            folders += `
+        <div class="folder" style="background-image: url('gif.png');">
+            <p>${tmp.value}</p>
+        </div>
+        `
+        }else if(tmp.value.indexOf("jpg") >= 0){
+            folders += `
+        <div class="folder" style="background-image: url('jpg.jpeg');">
+            <p>${tmp.value}</p>
+        </div>
+        `
+        }
+        tmp = tmp.down;
+    }
+
     document.getElementById('folder-files-div').innerHTML = folders;
 }
 
@@ -181,83 +213,84 @@ document.getElementById("boton-reporte-archivos").addEventListener('click', () =
 
 
 
-
-
-
-
-function base64(fileInput) {
+function fileToBase64(file) {
     return new Promise((resolve, reject) => {
-        const file = fileInput.files[0];
-        if (!file) {
-            reject(new Error("No file selected."));
-            return;
-        }
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = () => {
-            const base64 = reader.result.split(",")[1];
-            resolve(base64);
-        };
-        reader.onerror = error => {
-            reject(error);
-        };
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
     });
 }
 
 
 
 
-
-
-document.getElementById('upload-file').addEventListener('click', () => {
+document.getElementById('upload-file').addEventListener('click', async () => {
+    if (document.getElementById('fname').value === '/') {
+        currentFolder = currentUser.estudiante.nTree.root;
+    }
     const fileInput = document.getElementById("myFileInput");
-    let newFolder = fileInput.files[0].name;
-    base64(fileInput)
-    .then(base64 => {
-        console.log(base64);
+    let newFile = fileInput.files[0].name;
+    let file = fileInput.files[0];
 
-        if (document.getElementById('fname').value === '/') {
-            currentFolder = currentUser.estudiante.nTree.root;
-        }
-    
-        let date = new Date();
-    
-        for (let i = 0; i < currentFolder.children.length; i++) {
-            if (newFolder === currentFolder.children[i].value) {
-                currentFolder.addChild(new Node(currentFolder.children[i].value + "(2)"));
-                currentUser.estudiante.archivos.insert(`Se creo archivo \n\\"${currentFolder.children[i].value + "(2)"}\\"
+    let base64String = await fileToBase64(file);
+    console.log(base64String);
+
+    currentFolder.sparseMatrix.insertVertical(new NodeMatrix(newFile,base64String),currentFolder.sparseMatrix.head);
+
+
+    let date = new Date();
+    currentUser.estudiante.bitacora.insert(`Se creo archivo \n\\"${newFile}\\"
     Fecha: ${date.getDate() + '-' + Number(date.getMonth()) + 1 + '-' + date.getFullYear()}
     Hora: ${date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()}`);
-    
-    
-                generateFolders();
-                return alert(`El archivo ya existe pero se agregó como ${newFolder}(2)`);
-            }
+    generateFolders();
+});
+
+
+document.getElementById('boton-ver-archivo').addEventListener('click', async () => {
+    if (document.getElementById('fname').value === '/') {
+        currentFolder = currentUser.estudiante.nTree.root;
+    }
+    var verArchivo = window.prompt('Introduce el nombre de la carpeta');
+    let tmp = currentFolder.sparseMatrix.head;
+    while(tmp != null){
+        if(tmp.value == verArchivo){
+            document.getElementById('folder-files-div').innerHTML = tmp.base64;
+            const newTab = window.open();
+            newTab.document.write(tmp.base64);
+            return
         }
-        currentFolder.addChild(new Node(newFolder));
+        tmp = tmp.down;
+    }
+    alert('No se encontró el archivo');
+});
+
+document.getElementById("boton-reporte-archivos2").addEventListener('click', () => {
+    let count = 0;
+    let graph1 = ''
+    let tmp = currentFolder.sparseMatrix.head;
+    while(tmp.down != null){
+        graph1 += `nodo${count}
+        [ label = " ${tmp.value}"];
+        nodo${count} -> nodo${count + 1};
+        nodo${count + 1} -> nodo${count};`
+        tmp = tmp.down;
+        count++;
+    }
+    graph1 += `nodo${count}
+    [ label = " ${tmp.value}"];
+    nodo${count} -> nodo${0};
+    nodo${0} -> nodo${count};`
     
-    
-        currentUser.estudiante.archivos.insert(`Se creo archivo \n\\"${newFolder}\\"
-    Fecha: ${date.getDate() + '-' + Number(date.getMonth()) + 1 + '-' + date.getFullYear()}
-    Hora: ${date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()}`);
-    
-    
-        generateFolders();
 
-
-
-
-
-
-
-
-
-
-
-        
-        currentUser.estudiante.bitacora.insert()
-    })
-    .catch(error => {
-        console.error(error);
-    });
+    let graph = `digraph G{
+    rankdir=LR
+    node[shape=box]
+    concentrate=true
+    splines=ortho
+    ${graph1}
+    }`
+    console.log(graph);
+    document.getElementById('reporte-ntree').hidden = false;
+    document.getElementById('reporte-ntree').src = encodeURI("https://quickchart.io/graphviz?graph=" + graph);
 });
