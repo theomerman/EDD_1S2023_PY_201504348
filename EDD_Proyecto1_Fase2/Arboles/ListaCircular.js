@@ -48,7 +48,7 @@ class Node {
       }
     }
   
-    // Imprime los valores de la lista circular
+    
     print() {
       if (this.head === null) {
         return;

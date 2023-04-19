@@ -181,7 +181,7 @@ export default class AVLTree {
         return null;
     }
 
-    // in-order traversal
+    
     inOrderTraversal(node) {
         if (node != null) {
             this.inOrderTraversal(node.left);
@@ -198,7 +198,7 @@ export default class AVLTree {
         }
     }
 
-    // pre-order traversal
+    
 
     preOrderTraversal(node) {
         if (node != null) {
@@ -214,7 +214,7 @@ export default class AVLTree {
         }
     }
 
-    // post-order traversal
+    
     postOrderTraversal(node) {
         if (node != null) {
             this.postOrderTraversal(node.left);
