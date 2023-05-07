@@ -1,0 +1,164 @@
+html,
+body {
+    height: 100%;
+    background-color: white;
+}
+
+.login-div{
+    background-color: rgb(118, 255, 3);
+}
+
+.login-form {
+    max-width: 450px;
+    width: 100%;
+    border: 1px solid black;
+    padding: 10px;
+    margin: auto;
+    margin-top: 50px;
+}
+.admin-div{
+    max-width: 1500px;
+    border: 1px solid black;
+    padding: 10px;
+    background-color: rgb(209, 196, 233);
+    margin: auto;
+}
+.reporte-avl{
+    width: 100%;
+}
+
+.user-div{
+    max-width: 1500px;
+    border: 1px solid black;
+    padding: 10px;
+    
+    background-color: rgb(255, 215, 64);
+    margin: auto;
+}
+
+.salir{
+    background-color: red;
+}
+
+
+h1 {
+    text-align: center;
+    /* margin-top: 50px; */
+}
+
+table {
+    margin-top: 50px;
+    align-items: center;
+}
+
+.hide {
+    display: none;
+}
+
+.search-field{
+    /* background-color: blue; */
+    margin: auto;
+    max-width: 25%;
+    font-size: larger;
+}
+
+.button-menu{
+    margin: auto;
+    width: 20%;
+    margin-left: 5%;
+    border: 1px solid black;
+    background-color: rgb(118, 255, 3);
+}
+
+.folder-files{
+    background-color: white;
+    margin: auto;
+    width: 65%;
+    margin-right: 5%;
+    height: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid black;
+}
+
+.wrapper {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.button-folder{
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+
+.create-folder{
+    /* background: rgb(118, 255, 3); */
+    color: black;
+    
+}
+.remove-folder{
+    background-color: rgb(255, 61, 0);
+}
+
+.ver-archivo{
+    background-color: rgb(234, 128, 252);
+}
+
+.folder-report{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    /* background-color: blue; */
+    margin-left: 30%;
+    margin-right: 40%; 
+}
+
+.report-folder{
+    margin: auto;
+    background-color: blue;
+}
+.report-files{
+    background-color: white;
+    margin: auto;
+}
+
+.folder {
+    width: 100px;
+    height: 70px;
+    /* border: 2px solid #CCC; */
+    position: relative;
+    text-align: center;
+    background-size: 75%;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 10px;
+}
+
+.folder p {
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    right: 0;
+    margin: 0;
+    font-size: 14px;
+    color: #080808;
+}
+
+.reporte-carpetas-archivos-div{
+    /* background-color: blue; */
+    margin: auto;
+    width: 65%;
+    margin-right: 5%;
+    height: 500px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.rounded-div {
+    border-radius: 10px; /* adjust this value to control the amount of rounding */
+  }
