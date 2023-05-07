@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 
 </head>
 
@@ -88,54 +89,75 @@
         <br>
 
         <div class="search-field">
-        <label for="fname"><b>Ruta:</b></label>
-        <input type="text" id="fname" name="fname" value="/">
+            <label for="fname"><b>Ruta:</b></label>
+            <input type="text" id="fname" name="fname" value="/">
         </div>
 
         <div class="wrapper ">
             <div class="button-menu rounded-div">
                 <h1 id="welcome"></h1>
                 <div class="col-sm-6 button-folder">
-                    <button type="button" class="btn btn-primary create-folder" id="boton-crear-carpeta">Crear Carpeta</button>
+                    <button type="button" class="btn btn-primary create-folder" id="boton-crear-carpeta">Crear
+                        Carpeta</button>
                 </div>
                 <div class="col-sm-7 button-folder">
-                    <button type="button" class="btn btn-primary remove-folder" id="boton-eliminar-carpeta">Eliminar Carpeta</button>
+                    <button type="button" class="btn btn-primary remove-folder" id="boton-eliminar-carpeta">Eliminar
+                        Carpeta</button>
                 </div>
                 <div class="col-sm-7 button-folder">
-                    <button type="button" class="btn btn-primary ver-archivo" id="boton-ver-archivo">Archivo Base64</button>
+                    <button type="button" class="btn btn-primary ver-archivo" id="boton-ver-archivo">Archivo
+                        Base64</button>
                 </div>
                 <div class="col-sm-4">
                     <input type="file" id="myFileInput" accept=".jpg .pdf .txt">
-                    
+
 
                     <button id="upload-file">Subir Archivo</button>
                 </div>
             </div>
-    
-    
-            <div class="folder-files rounded-div" id="folder-files-div"></div>
 
-            <!-- <div class="reporte-carpetas-archivos-div" id="" src=""></div> -->
-            <img id="reporte-ntree" src="" alt="Reporte Arbol N-ario" class="reporte-carpetas-archivos-div">
+
+            <div class="folder-files rounded-div" id="folder-files-div"></div>
+            <div id="usuarios">
+                <label style="display: block; text-align: center; margin: 0 auto;"><b>Conversaciones:</b></label>
+                <button type="button" class="btn conversacion" id="usuario1">201504348 - usuario1</button>
+
+
+            </div>
+            <div id="mensajes">
+                <div class="chat1 rounded-div">
+                    <p style="color: white;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam cum tempore architecto! Exercitationem impedit nisi delectus mollitia laudantium doloribus. Nihil eos reprehenderit modi, consequatur aliquid eum vero voluptas. Nam, itaque?</p>
+                </div>
+                <div class="chat2 rounded-div">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, odio laboriosam dolor eos temporibus architecto, autem reiciendis culpa quae facere, tempora delectus doloremque sapiente repellat. Eos molestiae quibusdam velit illo!</div>
+            </div>
+            <input class="mensaje-entrada" type="text" id="mensaje" name="fname" value="">
         </div>
 
 
 
         <div class="folder-report">
             <div class="report-folder">
-                <button type="button" class="btn" id="boton-reporte-carpeta">Reporte Carpetas</button>
+                <button type="button" class="btn " id="boton-reporte-carpeta">Reporte Carpetas</button>
             </div>
-            <div class="report-files">
-                <button type="button" class="btn tmp " id="boton-reporte-archivos">Bitacora</button>
+            <div class="report-folder">
+                <button type="button" class="btn  " id="boton-reporte-archivos">Bitacora</button>
             </div>
-            <div class="report-files">
-                <button type="button" class="btn tmp " id="boton-reporte-archivos2">Reporte Archivos</button>
+            <div class="report-folder">
+                <button type="button" class="btn  " id="boton-reporte-archivos2">Reporte Archivos</button>
             </div>
-        </div>
+            <div class="report-folder">
+                <button type="button" class="btn  " id="nueva-conversacion">Nueva Conversación</button>
+            </div>
+            <div class="report-folder">
+                <button type="button" class="btn  " id="enviar-mensaje">Enviar Mensaje</button>
+            </div>
 
+
+        </div>
+        <img id="reporte-ntree" src="" alt="Reporte Arbol N-ario" class="reporte-carpetas-archivos-div">
 
     </div>
-    
+
 
     <!-- Link to Bootstrap JS file -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -151,7 +173,7 @@
     <!-- <script src="Arboles/AVLTree.js"></script>
     <script src="Arboles/ListaCircular.js"></script>
     <script src="Arboles/Nodo/Estudiante.js"></script> -->
-    
+
 </body>
 
 </html>

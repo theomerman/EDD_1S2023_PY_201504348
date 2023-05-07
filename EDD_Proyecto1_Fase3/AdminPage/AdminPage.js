@@ -64,7 +64,8 @@ cargaMasiva.addEventListener('click', () => {
             if (!arbolAVL.search(alumno.carnet)) {
 
                 arbolAVL.insert(alumno.carnet, new Estudiante(alumno.nombre, alumno.carnet, alumno.password, alumno.Carpeta_Raiz));
-                hashTable.set(alumno.carnet, alumno);
+                if(!hashTable.get(alumno.carnet))
+                    hashTable.set(alumno.carnet, new Estudiante(alumno.nombre, alumno.carnet, alumno.password, alumno.Carpeta_Raiz));
                 
             }
 
@@ -153,7 +154,7 @@ hashButton.addEventListener('click', () => {
     hashTable.table[0].forEach((element2) => {
         if (element2) {
             // console.log(element2[1]);
-            tmp += `<tr><td>${element2[1].carnet}</td><td>${element2[1].nombre}</td> <td> ${element2[1].password}</td> </tr>`   
+            tmp += `<tr><td>${element2[1].carne}</td><td>${element2[1].nombre}</td> <td> ${element2[1].encriptedPassword}</td> </tr>`   
         }
     });
 

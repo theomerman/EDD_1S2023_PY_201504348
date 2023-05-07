@@ -4,6 +4,10 @@ import { Node } from "../Arboles/NTree.js";
 import { nTreeNode } from "../Login.js";
 import { SparseMatrix } from "../SparseMatrix/SparseMatrix.js";
 import { NodeMatrix } from "../SparseMatrix/SparseMatrix.js";
+import { arbolAVL } from "../AdminPage/AdminPage.js";
+import { DoublyLinkedList } from "../LinkedList/DoubleLinkedList.js";
+import AVLTree from "../Arboles/AVLTree.js";
+
 
 var currentFolder;
 
@@ -294,4 +298,27 @@ document.getElementById("boton-reporte-archivos2").addEventListener('click', () 
     console.log(graph);
     document.getElementById('reporte-ntree').hidden = false;
     document.getElementById('reporte-ntree').src = encodeURI("https://quickchart.io/graphviz?graph=" + graph);
+});
+
+document.getElementById("nueva-conversacion").addEventListener('click', () => {
+    
+    var receptor = window.prompt('Introduce el carné del estudiante al cual quieres iniciar la conversación');
+    var estudiante = arbolAVL.search(parseInt(receptor)).estudiante
+    
+    let newList = new DoublyLinkedList();
+    estudiante.mensajes.set(receptor, newList);
+    currentUser.estudiante.mensajes.set(receptor, newList);
+    console.log(estudiante);
+    console.log(currentUser.estudiante);
+    
+    let tmp = estudiante.mensajes.get(receptor);
+
+    tmp.addToEnd(currentUser.estudiante.carne + "", receptor + "", "Hola, ¿cómo estás?");
+
+    
+    
+    // console.log(receptor);
+    // alert(receptor);
+    
+
 });

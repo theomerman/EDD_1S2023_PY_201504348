@@ -6,17 +6,25 @@ export default class Estudiante {
         this.nombre = nombre;
         this.carne = carne;
         this.password = password;
-        this.encriptedPassword = this.encriptarPassword(password);
+        this.encriptedPassword = this.encryptPassword(password);
         this.carpetaRaiz = carpetaRaiz;
         this.nTree = new Tree('/');
         this.bitacora = new CircularLinkedList();
         this.archivos = new CircularLinkedList();
+        this.mensajes = new Map();
+        
+
     }
-    encriptarPassword(password) {
-        let encriptedPassword = '';
-        for (let i = 0; i < password.length; i++) {
-            encriptedPassword += String.fromCharCode(password.charCodeAt(i) + 3);
-        }
-        return encriptedPassword;
-    }
+
+    
+    encryptPassword(password) {
+        // Generate the hashed password using SHA-256
+        const hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
+  
+        return hashedPassword;
+      }
+  
+      // Example usage:
+
+
 }
