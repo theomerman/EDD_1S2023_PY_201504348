@@ -193,8 +193,14 @@ document.getElementById('reporte-mensajes').addEventListener('click', () => {
 
     for (const key of tmp.keys()) {
         let tmp2 = tmp.get(key).head;
+        let tmp3 = null;
         while (tmp2) {
-            graph2 += `node${contadorGraphviz}[label="Index: ${tmp2.index}\nTimeStamp = ${tmp2.timeStamp}\nEmisor: ${tmp2.emisor}\nReceptor: ${tmp2.receptor}\nMensaje: ${tmp2.mensajeEncriptado}\nPreviousHash: ${tmp2.previuosHash}\nHash: ${tmp2.hash}"]\n`
+            try{
+                graph2 += `node${contadorGraphviz}[label="Index: ${tmp2.index}\nTimeStamp = ${tmp2.timeStamp}\nEmisor: ${tmp2.emisor}\nReceptor: ${tmp2.receptor}\nMensaje: ${tmp2.mensajeEncriptado}\nPreviousHash: ${tmp3.hash}\nHash: ${tmp2.hash}"]\n`
+            }catch{
+                graph2 += `node${contadorGraphviz}[label="Index: ${tmp2.index}\nTimeStamp = ${tmp2.timeStamp}\nEmisor: ${tmp2.emisor}\nReceptor: ${tmp2.receptor}\nMensaje: ${tmp2.mensajeEncriptado}\nPreviousHash: ${"0000"}\nHash: ${tmp2.hash}"]\n`
+            }
+            
             console.log(contadorGraphviz);
             if (tmp2.next != null) {
                 graph2 += `node${contadorGraphviz}->node${contadorGraphviz + 1}\n`
@@ -202,6 +208,7 @@ document.getElementById('reporte-mensajes').addEventListener('click', () => {
             }
             
             contadorGraphviz++;
+            tmp3 = tmp2;
             tmp2 = tmp2.next;
             console.log(contadorGraphviz);
         }
