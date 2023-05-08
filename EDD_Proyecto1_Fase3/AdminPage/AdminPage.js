@@ -64,9 +64,9 @@ cargaMasiva.addEventListener('click', () => {
             if (!arbolAVL.search(alumno.carnet)) {
 
                 arbolAVL.insert(alumno.carnet, new Estudiante(alumno.nombre, alumno.carnet, alumno.password, alumno.Carpeta_Raiz));
-                if(!hashTable.get(alumno.carnet))
+                if (!hashTable.get(alumno.carnet))
                     hashTable.set(alumno.carnet, new Estudiante(alumno.nombre, alumno.carnet, alumno.password, alumno.Carpeta_Raiz));
-                
+
             }
 
 
@@ -154,7 +154,7 @@ hashButton.addEventListener('click', () => {
     hashTable.table[0].forEach((element2) => {
         if (element2) {
             // console.log(element2[1]);
-            tmp += `<tr><td>${element2[1].carne}</td><td>${element2[1].nombre}</td> <td> ${element2[1].encriptedPassword}</td> </tr>`   
+            tmp += `<tr><td>${element2[1].carne}</td><td>${element2[1].nombre}</td> <td> ${element2[1].encriptedPassword}</td> </tr>`
         }
     });
 
@@ -183,3 +183,44 @@ logOut.addEventListener('click', () => {
 
 });
 
+
+document.getElementById('reporte-mensajes').addEventListener('click', () => {
+    var usuario = window.prompt('Introduce el carné del estudiante al que quieres acceder');
+    let tmp = arbolAVL.search(parseInt(usuario)).estudiante.mensajes;
+
+    let graph2 = '';
+    let contadorGraphviz = 0;
+
+    for (const key of tmp.keys()) {
+        let tmp2 = tmp.get(key).head;
+        while (tmp2) {
+            graph2 += `node${contadorGraphviz}[label="Index: ${tmp2.index}\nTimeStamp = ${tmp2.timeStamp}\nEmisor: ${tmp2.emisor}\nReceptor: ${tmp2.receptor}\nMensaje: ${tmp2.mensajeEncriptado}\nPreviousHash: ${tmp2.previuosHash}\nHash: ${tmp2.hash}"]\n`
+            console.log(contadorGraphviz);
+            if (tmp2.next != null) {
+                graph2 += `node${contadorGraphviz}->node${contadorGraphviz + 1}\n`
+                console.log(contadorGraphviz);
+            }
+            
+            contadorGraphviz++;
+            tmp2 = tmp2.next;
+            console.log(contadorGraphviz);
+        }
+        contadorGraphviz += 3;
+    }
+
+    let graph = `digraph G{\nrankdir=UD\nnode[shape=box]\nconcentrate=true
+        ${graph2}}
+        `
+
+
+    table.hidden = true;
+    document.getElementById('ordenamientos').hidden = true;
+    document.getElementById('reporte-avl').hidden = false;
+    // let graph = `digraph G{\nrankdir=UD\nnode[shape=box]\nconcentrate=true
+    //     ${arbolAVL.root.getCodigoInterno()}}
+    //     `
+    console.log(graph)
+
+    document.getElementById('reporte-avl').src = encodeURI("https://quickchart.io/graphviz?graph=" + graph);
+    // 
+});

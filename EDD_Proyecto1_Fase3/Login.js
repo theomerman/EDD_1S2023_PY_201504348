@@ -1,6 +1,6 @@
 import AVLTree from "./Arboles/AVLTree.js";
 import { arbolAVL } from "./AdminPage/AdminPage.js";
-
+import { generateConversations } from "./UserPage/UserPage.js";
 
 // Get the login form element
 const loginForm = document.querySelector('#login-form');
@@ -51,6 +51,7 @@ loginForm.addEventListener('submit', (event) => {
             nTreeNode = currentUser.estudiante.nTree.root;
             document.getElementById('folder-files-div').innerHTML = '';
             document.getElementById('reporte-ntree').hidden = true;
+            generateConversations();
         } else {
             alert('Invalid username or password. Please try again.');
         }
@@ -71,8 +72,8 @@ function hiddeAll() {
     ordenamientos.hidden = true;
     userDashboard.hidden = true
 }
-// hiddeAll();
-// adminDashboard.hidden = true;
+hiddeAll();
+
 
 
 

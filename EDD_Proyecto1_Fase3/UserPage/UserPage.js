@@ -40,6 +40,7 @@ document.getElementById('fname').addEventListener("keydown", function (event) {
         // console.log(graphNtree(currentUser.estudiante.nTree.root));
 
         generateFolders();
+        generateConversations();
 
 
     }
@@ -137,13 +138,13 @@ layout=neato;
 
 `;
     contadorGraphviz = 0;
-    traverse(node,nivel);
+    traverse(node, nivel);
     dotInfo += '}'
     return dotInfo
 }
 
 function traverse(node, _nivel) {
-    if(node.value == '/')
+    if (node.value == '/')
         dotInfo += `nodo${contadorGraphviz} [ label = "${node.value}", shape = box];\n`;
     else dotInfo += `nodo${contadorGraphviz} [ label = "${node.value}"];\n`;
 
@@ -171,26 +172,26 @@ function generateFolders() {
         `
     }
     let tmp = currentFolder.sparseMatrix.head.down;
-    while(tmp != null){
-        if(tmp.value.indexOf("pdf") >= 0){
+    while (tmp != null) {
+        if (tmp.value.indexOf("pdf") >= 0) {
             folders += `
         <div class="folder" style="background-image: url('pdf.png');">
             <p>${tmp.value}</p>
         </div>
         `
-        }else if(tmp.value.indexOf("txt") >= 0){
+        } else if (tmp.value.indexOf("txt") >= 0) {
             folders += `
         <div class="folder" style="background-image: url('txt.png');">
             <p>${tmp.value}</p>
         </div>
         `
-        }else if(tmp.value.indexOf("gif") >= 0){
+        } else if (tmp.value.indexOf("gif") >= 0) {
             folders += `
         <div class="folder" style="background-image: url('gif.png');">
             <p>${tmp.value}</p>
         </div>
         `
-        }else if(tmp.value.indexOf("jpg") >= 0){
+        } else if (tmp.value.indexOf("jpg") >= 0) {
             folders += `
         <div class="folder" style="background-image: url('jpg.jpeg');">
             <p>${tmp.value}</p>
@@ -241,7 +242,7 @@ document.getElementById('upload-file').addEventListener('click', async () => {
     let base64String = await fileToBase64(file);
     console.log(base64String);
 
-    currentFolder.sparseMatrix.insertVertical(new NodeMatrix(newFile,base64String),currentFolder.sparseMatrix.head);
+    currentFolder.sparseMatrix.insertVertical(new NodeMatrix(newFile, base64String), currentFolder.sparseMatrix.head);
 
 
     let date = new Date();
@@ -258,8 +259,8 @@ document.getElementById('boton-ver-archivo').addEventListener('click', async () 
     }
     var verArchivo = window.prompt('Introduce el nombre de la carpeta');
     let tmp = currentFolder.sparseMatrix.head;
-    while(tmp != null){
-        if(tmp.value == verArchivo){
+    while (tmp != null) {
+        if (tmp.value == verArchivo) {
             document.getElementById('folder-files-div').innerHTML = tmp.base64;
             const newTab = window.open();
             newTab.document.write(tmp.base64);
@@ -274,7 +275,7 @@ document.getElementById("boton-reporte-archivos2").addEventListener('click', () 
     let count = 0;
     let graph1 = ''
     let tmp = currentFolder.sparseMatrix.head;
-    while(tmp.down != null){
+    while (tmp.down != null) {
         graph1 += `nodo${count}
         [ label = " ${tmp.value}"];
         nodo${count} -> nodo${count + 1};
@@ -286,7 +287,7 @@ document.getElementById("boton-reporte-archivos2").addEventListener('click', () 
     [ label = " ${tmp.value}"];
     nodo${count} -> nodo${0};
     nodo${0} -> nodo${count};`
-    
+
 
     let graph = `digraph G{
     rankdir=LR
@@ -301,24 +302,95 @@ document.getElementById("boton-reporte-archivos2").addEventListener('click', () 
 });
 
 document.getElementById("nueva-conversacion").addEventListener('click', () => {
-    
+
     var receptor = window.prompt('Introduce el carné del estudiante al cual quieres iniciar la conversación');
-    var estudiante = arbolAVL.search(parseInt(receptor)).estudiante
-    
+
+    try {
+        var estudiante = arbolAVL.search(parseInt(receptor)).estudiante
+    } catch {
+        alert('No se encontró el estudiante');
+        return
+    }
+
     let newList = new DoublyLinkedList();
-    estudiante.mensajes.set(receptor, newList);
-    currentUser.estudiante.mensajes.set(receptor, newList);
+    estudiante.mensajes.set(currentUser.estudiante.carne+"", newList);
+    currentUser.estudiante.mensajes.set(receptor+"", newList);
     console.log(estudiante);
     console.log(currentUser.estudiante);
-    
+
     let tmp = estudiante.mensajes.get(receptor);
+    generateConversations();
+});
 
-    tmp.addToEnd(currentUser.estudiante.carne + "", receptor + "", "Hola, ¿cómo estás?");
+var currentConversation = null;
+export {generateConversations}
 
-    
-    
-    // console.log(receptor);
-    // alert(receptor);
-    
+function generateConversations() {
+    let conversations = '<label style="display: block; text-align: center; margin: 0 auto;"><b>Conversaciones:</b></label>';
+    let tmp = currentUser.estudiante.mensajes;
+    for (const key of tmp.keys()) {
+        conversations += `<button type="button" class="btn conversacion" id="${key}">${key}</button>`;
 
+    }
+    document.getElementById('usuarios').innerHTML = conversations;
+
+    // Add event listener to parent element using event delegation
+    document.getElementById('usuarios').addEventListener('click', function (event) {
+        const target = event.target;
+
+        // Check if the clicked element has the desired class
+        if (target.classList.contains('conversacion')) {
+            // Retrieve the id of the clicked button
+            const buttonId = target.id;
+
+            // Call the desired function with the buttonId or perform any other action
+            currentConversation = buttonId;
+            let tmp = currentUser.estudiante.mensajes.get(buttonId).head;
+            // console.log(tmp);
+            let messages = '';
+            while(tmp != null){
+                console.log(tmp);
+                if(tmp.receptor == currentUser.estudiante.carne){
+                    messages += 
+`       <div class="chat1 rounded-div">
+            <div class="chat-message">${tmp.mensaje}</div>
+        </div>`
+                }else{
+                    messages += `
+                    <div class="chat2 rounded-div">
+                        <div class="chat-message">${tmp.mensaje}</div>
+
+                </div>
+                    `
+                }
+                tmp = tmp.next;
+            }
+            document.getElementById('mensajes').innerHTML = messages;
+
+        }
+    });
+
+}
+
+document.getElementById("enviar-mensaje").addEventListener('click', () => {
+    if (currentConversation == null) {
+        alert('Seleccione una conversación');
+        return
+    }
+    let mensaje = document.getElementById('mensaje').value;
+    if (mensaje == '') {
+        alert('Escriba un mensaje');
+        return
+    }
+    // let date = new Date();
+    // console.log(currentUser.estudiante.carne,currentConversation,mensaje)
+    currentUser.estudiante.mensajes.get(currentConversation).addToEnd(currentUser.estudiante.carne, currentConversation, mensaje);
+    // console.log(currentUser.estudiante.mensajes.get(currentConversation));
+    // console.log(arbolAVL.search(parseInt(currentConversation)).estudiante.mensajes.get(currentUser.estudiante.carne));
+    // currentUser.estudiante.mensajes.get(currentConversation).addToEnd(mensaje);
+    // currentUser.estudiante.mensajes.get(currentConversation).addToEnd(`Fecha: ${date.getDate() + '-' + Number(date.getMonth()) + 1 + '-' + date.getFullYear()}
+    // Hora: ${date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()}
+    // ${currentUser.estudiante.carne}: ${mensaje}`);
+    // generateConversations();
+    document.getElementById('mensaje').value = '';
 });

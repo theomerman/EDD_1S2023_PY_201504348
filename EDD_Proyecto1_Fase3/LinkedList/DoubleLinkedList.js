@@ -6,8 +6,9 @@ class Node {
         this.emisor = emisor;
         this.receptor = receptor;
         this.mensaje = mensaje;
+        this.mensajeEncriptado = this.generateHash(index, mensaje);
         this.previuosHash = this.getPreviusHash();
-        this.hash = this.generateHash();
+        this.hash = this.generateHash(index, this.timeStamp, emisor, receptor, mensaje);
         this.next = null;
         this.prev = null;
     }
@@ -47,14 +48,14 @@ class DoublyLinkedList {
         this.currentIndex++;
     }
 
-    // traverseForward() {
-    //     let current = this.head;
+//     traverseForward() {
+//         let current = this.head;
 
-    //     while (current) {
-    //       console.log(`Index: ${current.index}, Data: ${current.data}`);
-    //       current = current.next;
-    //     }
-    //   }
+//         while (current) {
+//           console.log(`Index: ${current.index}, Data: ${current.data}`);
+//           current = current.next;
+//         }
+//       }
 
 }
 
